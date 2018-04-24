@@ -1,0 +1,51 @@
+$(document).ready(function(){
+
+    $('#loginButton').click(function(event){
+
+        $('#errorAlert').fadeOut('fast');
+        $(this).prop('disabled', true);
+        event.preventDefault();
+
+        var email = $('#inputMail').val();
+        var password = $('#inputPassword').val();
+
+        var error = "";
+
+        if(email < 2){
+            error += "<li>Please enter your E-Mail</li>";
+        }
+
+        if(password < 8){
+            error += "<li>Please enter a correct Password</li>";
+        }
+
+        if(error != ""){
+
+            $('#errorText').html(error);
+            $('#errorAlert').fadeIn('fast');
+            $(this).prop('disabled', false);
+
+        } else {
+
+            $.ajax({
+                type: "POST",
+                data: {email:email, password:password},
+                url: "modul/login/loginUser.php",
+                success: function(data){
+                    if(data){
+                        $('#errorText').html(data);
+                        $('#errorAlert').fadeIn('fast');
+                        $('#loginButton').prop('disabled', false);
+                    } else {
+                        $('#successText').html("Successfully Registered. You can now Login.");
+                        $('#successAlert').fadeIn('fast');
+                        $('#regForm').slideUp('fast');
+                    }
+                }
+            });
+
+        }
+
+    });
+
+});
