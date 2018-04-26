@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 24. Apr 2018 um 18:58
+-- Erstellungszeit: 26. Apr 2018 um 23:06
 -- Server-Version: 10.1.30-MariaDB
 -- PHP-Version: 7.2.2
 
@@ -36,6 +36,17 @@ CREATE TABLE `tb_modul` (
   `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Daten für Tabelle `tb_modul`
+--
+
+INSERT INTO `tb_modul` (`ID`, `title`, `url`, `secured`, `description`) VALUES
+(1, 'Dashboard', 'modul/dashboard/dashboard.php', 1, NULL),
+(2, 'Login', 'modul/login/login.php', 0, NULL),
+(3, 'Register', 'modul/register/register.php', 0, NULL),
+(4, 'Settings', 'modul/settings/settings.php', 1, NULL),
+(5, 'Logout', 'modul/logout/logout.php', 1, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -56,6 +67,18 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Tabellenstruktur für Tabelle `tb_user_weight`
+--
+
+CREATE TABLE `tb_user_weight` (
+  `ID` int(11) NOT NULL,
+  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_entered` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `weight` double NOT NULL,
+  `tb_user_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
 -- Indizes der exportierten Tabellen
 --
 
@@ -69,7 +92,15 @@ ALTER TABLE `tb_modul`
 -- Indizes für die Tabelle `tb_user`
 --
 ALTER TABLE `tb_user`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indizes für die Tabelle `tb_user_weight`
+--
+ALTER TABLE `tb_user_weight`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `tb_user_ID` (`tb_user_ID`);
 
 --
 -- AUTO_INCREMENT für exportierte Tabellen
@@ -79,13 +110,29 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT für Tabelle `tb_modul`
 --
 ALTER TABLE `tb_modul`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT für Tabelle `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT für Tabelle `tb_user_weight`
+--
+ALTER TABLE `tb_user_weight`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- Constraints der exportierten Tabellen
+--
+
+--
+-- Constraints der Tabelle `tb_user_weight`
+--
+ALTER TABLE `tb_user_weight`
+  ADD CONSTRAINT `tb_user_weight_ibfk_1` FOREIGN KEY (`tb_user_ID`) REFERENCES `tb_user` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -10,6 +10,14 @@ body {
     padding-left: 17rem;
   }
 }
+h4 {
+    padding-top: 10px;
+}
+.factCard {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
 .floatAlerts {
     margin-top: 50px;
     margin-left: auto;
