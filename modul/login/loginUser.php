@@ -1,6 +1,7 @@
 <?php
 
     include("../../include/database.php");
+    include("../../include/session.php");
 
     function test_input($data) {
         $data = trim($data);
@@ -25,7 +26,7 @@
         echo $error;
     } else {
 
-        if (!($stmt = $mysqli->prepare("SELECT password FROM `tb_user` WHERE email = ?;"))) {
+        if (!($stmt = $mysqli->prepare("SELECT ID, password FROM `tb_user` WHERE email = ?;"))) {
              echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
         }
 
@@ -40,23 +41,22 @@
         $result = $stmt->get_result();
         $row = $result->fetch_array(MYSQLI_NUM);
 
-        if (!password_verify($password, $row[0])) {
+        if(!isset($row)){
+            echo '<li>E-Mail not found</li>';
+            die();
+        }
+
+        if (!password_verify($password, $row[1])) {
+
             echo '<li>Incorrect Password</li>';
             die();
+
         } else {
 
-            session_start();
-            ini_set('session.cookie_lifetime', 60 * 60 * 24 * 100);
-            ini_set('session.gc_maxlifetime', 60 * 60 * 24 * 100);
-
-            $_SESSION = array(
-                'user'  => array(
-                    'username'  => $row['username'],
-                    'id' => $row['ID']
-                )
+            $_SESSION['user'] = array(
+                'email'  => $email,
+                'id' => $row[0]
             );
-
-            header("Refresh:0");
 
         }
 

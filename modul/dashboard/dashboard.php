@@ -2,7 +2,7 @@
 
     include("../../include/session.php");
 
-    if(!$session_loggedin){
+    if($session_loggedin == false){
         echo '<script type="text/javascript">parent.window.location.reload();</script>';
         exit();
     }

@@ -3,6 +3,13 @@
 
     <head>
 
+        <?php
+
+            include("include/database.php");
+            include("include/session.php");
+
+        ?>
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="Simple Weight-Manager for easy and fast loss of weight">
@@ -27,7 +34,7 @@
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
                 <span class="d-block d-lg-none">Atta</span>
                 <span class="d-none d-lg-block">
-                    <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt="">
+                    <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/logo.svg" alt="" width="200px" style="background-color: white; border:none;">
                 </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,10 +44,7 @@
                 <ul class="navbar-nav">
                     <?php
 
-                        include("include/database.php");
-                        include("include/session.php");
-
-                        if($session_loggedin){
+                        if($session_loggedin == true){
                             $data = $mysqli->query("SELECT * FROM `tb_modul` WHERE `secured` is true");
                         } else {
                             $data = $mysqli->query("SELECT * FROM `tb_modul` WHERE `secured` is false");
@@ -66,9 +70,13 @@
         <div class="container-fluid p-0">
             <?php
 
-                if($session_loggedin){
+                if($session_loggedin == true){
                     if(isset($_GET['page']) && $_GET['page'] != ""){
-                        $pageLink = "modul/".$_GET['page'].".php";
+                        if($_GET['page'] == "login/login" || $_GET['page'] == "register/register"){
+                            $pageLink = "modul/dashboard/dashboard.php";
+                        } else {
+                            $pageLink = "modul/".$_GET['page'].".php";
+                        }
                     } else if(isset($_SESSION["user"]["currentPath"])){
                         $pageLink = $_SESSION["user"]["currentPath"];
                     } else {

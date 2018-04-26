@@ -3,7 +3,7 @@
     include("../../include/session.php");
     include("../../include/alerts.php");
 
-    if($session_loggedin){
+    if($session_loggedin == true){
         echo '<script type="text/javascript">parent.window.location.reload();</script>';
     }
 

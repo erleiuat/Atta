@@ -1,10 +1,7 @@
 <?php
 
     include("../../include/session.php");
-
-    if($session_loggedin){
-        echo '<script type="text/javascript">parent.window.location.reload();</script>';
-    }
+    include("../../include/alerts.php");
 
 ?>
 <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">

@@ -37,9 +37,9 @@ $(document).ready(function(){
                         $('#errorAlert').fadeIn('fast');
                         $('#loginButton').prop('disabled', false);
                     } else {
-                        $('#successText').html("Successfully Registered. You can now Login.");
+                        $('#successText').html("Successfully Loggedin.");
                         $('#successAlert').fadeIn('fast');
-                        $('#regForm').slideUp('fast');
+                        parent.window.location.reload();
                     }
                 }
             });
