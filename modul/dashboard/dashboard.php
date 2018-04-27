@@ -21,7 +21,7 @@
         <br/>
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
-                <div class="card">
+                <div class="card" id="addEntryBox" style="display: none;">
                     <div class="col-12 text-center">
                         <h4>Add entry</h4>
                         <form>
@@ -41,11 +41,11 @@
             </div>
         </div>
 
-        <div class="row" id="facts">
+        <div class="row" id="facts" style="display: none;">
             <!-- GET FACTS -->
         </div>
 
-        <div class="row" id="entries">
+        <div class="row" id="entries" style="display: none;">
             <!-- GET ENTRIES -->
         </div>
 

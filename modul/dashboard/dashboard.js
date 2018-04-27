@@ -1,6 +1,14 @@
-function reload(){
-        $('#facts').load( "modul/dashboard/getFacts.php");
-        $('#entries').load( "modul/dashboard/getEntries.php");
+function reload(onstart){
+        $('#facts').load( "modul/dashboard/getFacts.php", function(){
+            if(onstart){
+                $('#facts').slideDown('slow');
+            }
+        });
+        $('#entries').load( "modul/dashboard/getEntries.php", function(){
+            if(onstart){
+                $('#entries').slideDown('slow');
+            }
+        });
 }
 
 function delEntry(entryID){
@@ -51,7 +59,8 @@ function setTimestamp() {
 
 $(document).ready(function(){
 
-    reload();
+    reload(1);
+    $('#addEntryBox').slideDown('fast');
 
     setTimestamp();
 
