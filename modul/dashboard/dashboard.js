@@ -37,7 +37,7 @@ function timeStamp() {
     }
 
     return date.join("-") + " " + time.join(":");
-    
+
 }
 
 function setTimestamp() {

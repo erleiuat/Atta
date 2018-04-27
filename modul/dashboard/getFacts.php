@@ -107,7 +107,7 @@
             ?>
             <div class="card factCard <?php if($echo >= -5){echo "alert-success";}else if($echo >= -10){echo "alert-primary";}else{echo "alert-danger";} ?>">
                 <div class="col-12">
-                    <b>Difference current - target weight</b>
+                    <b>Difference current & target weight</b>
                 </div>
                 <div class="col-12 text-center">
                     <h2>
@@ -139,7 +139,9 @@
                 }
             ?>">
                 <div class="col-12">
-                    <b>Current BMI</b>
+                    <b>Current BMI</b> <a href="#" data-toggle="tooltip" data-placement="right" title="Your BMI (Body-Mass-Index) should be between 18-24">
+                        <i class="far fa-question-circle"></i>
+                    </a>
                 </div>
                 <div class="col-12 text-center">
                     <h2>
@@ -153,7 +155,7 @@
         <div class="col-lg-4">
             <div class="card factCard">
                 <div class="col-12">
-                    <b>Days till goal Date</b>
+                    <b>Days till goal date</b>
                 </div>
                 <div class="col-12 text-center">
                     <h2>
@@ -193,7 +195,13 @@
             ?>
             <div class="card factCard <?php if($echo < -0.210){ echo "alert-danger"; } ?>">
                 <div class="col-12">
-                    <b>Daily needed loss</b>
+                    <?php
+                        if($echo <= 0){
+                            echo "<b>Daily needed <i>loss</i></b>";
+                        } else {
+                            echo "<b>Daily needed <i>gain</i></b>";
+                        }
+                    ?>
                 </div>
                 <div class="col-12 text-center">
                     <h2>
@@ -207,7 +215,9 @@
         <div class="col-lg-4">
             <div class="card factCard">
                 <div class="col-12">
-                    <b>Daily calorie needs</b>
+                    <b>Daily calorie needs/base</b> <a href="#" data-toggle="tooltip" data-placement="right" title="This is the amount of calories you usually need to neither lose nor gain any weight. Please note the instructions at 'FAQ'">
+                        <i class="far fa-question-circle"></i>
+                    </a>
                 </div>
                 <div class="col-12 text-center">
                     <h2>
@@ -263,7 +273,9 @@
                 }
             ?>">
                 <div class="col-12">
-                    <b>Daily Calories to reach aims</b>
+                    <b>Daily max. calories to reach aims</b> <a href="#" data-toggle="tooltip" data-placement="right" title="With this amount of calories per day you'll achive your weight goal on the chosen day">
+                        <i class="far fa-question-circle"></i>
+                    </a>
                 </div>
                 <div class="col-12 text-center">
                     <h2>
@@ -275,3 +287,13 @@
 
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="tooltip"]').each(function(){
+            $(this).click(function(event){
+                event.preventDefault();
+            });
+        });
+    });
+</script>
