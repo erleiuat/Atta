@@ -12,10 +12,10 @@
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Simple Weight-Manager for easy and fast loss of weight">
+        <meta name="description" content="Simple Weight-Manager for easy loss of weight">
         <meta name="author" content="Elia Reutlinger">
 
-        <title>Atta - Simple & Fast weight loss</title>
+        <title>Atta - Simple weight loss</title>
 
         <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
