@@ -12,6 +12,7 @@ $(document).ready(function(){
         var height = $('#height').val();
         var aim_date = $('#aim_date').val();
         var aim_weight = $('#aim_weight').val();
+        var gender = $('#gender').val();
         var error = "";
 
         if(firstname < 2){
@@ -30,12 +31,18 @@ $(document).ready(function(){
             error += "<li>Please enter your Height</li>";
         }
 
-        if(aim_date < 8){
-            error += "<li>Please enter a Aim-Date</li>";
+        if(aim_date != "" || aim_weight != ""){
+            if(aim_date < 8){
+                error += "<li>Please enter a Aim-Date</li>";
+            }
+
+            if(aim_weight < 8){
+                error += "<li>Please enter a Aim-Weight</li>";
+            }
         }
 
-        if(aim_weight < 8){
-            error += "<li>Please enter a Aim-Weight</li>";
+        if(gender < 0 || gender > 1){
+            error += "<li>Please select a gender</li>";
         }
 
         if(error != ""){
@@ -48,7 +55,7 @@ $(document).ready(function(){
 
             $.ajax({
                 type: "POST",
-                data: {firstname:firstname, lastname:lastname, age:age, height:height, aim_date:aim_date, aim_weight:aim_weight},
+                data: {firstname:firstname, lastname:lastname, age:age, height:height, aim_date:aim_date, aim_weight:aim_weight, gender:gender},
                 url: "modul/settings/updateEntry.php",
                 success: function(data){
                     if(data){

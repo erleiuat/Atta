@@ -28,7 +28,7 @@
                     <tbody id="">
                         <?php
 
-                        $sql = "SELECT firstname, lastname, age, height, weight, aim_date, aim_weight FROM tb_user WHERE ID = $session_userid";
+                        $sql = "SELECT firstname, lastname, age, height, weight, aim_date, aim_weight, gender FROM tb_user WHERE ID = $session_userid";
 
                         $res = $mysqli->query($sql);
                         if (isset($res) && $res->num_rows > 0) {
@@ -40,6 +40,7 @@
                             $user_height = $row['height'];
                             $user_aimDate = $row['aim_date'];
                             $user_aimWeight = $row['aim_weight'];
+                            $user_gender = $row['gender'];
 
                         }
 
@@ -72,6 +73,16 @@
                         <tr>
                             <td style="padding-top:20px;">Aim Weight</td>
                             <td><input type="text" class="form-control form-inchange" id="aim_weight" value="<?php echo $user_aimWeight;?>"/></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top:20px;">Gender</td>
+                            <td>
+                                <select id="gender" class="form-control form-inchange">
+                                    <option value="1" <?php if($user_gender == 1){echo "selected";} ?>>Female</option>
+                                    <option value="0" <?php if($user_gender == 0){echo "selected";} ?>>Male</option>
+                                </select>
+                            </td>
                             <td></td>
                         </tr>
                         <tr>

@@ -21,17 +21,18 @@
     $height = test_input($_POST['height']);
     $aim_date = test_input($_POST['aim_date']);
     $aim_weight = test_input($_POST['aim_weight']);
+    $gender = test_input($_POST['gender']);
     $error = "";
 
     if($error){
         echo $error;
     } else {
 
-        if (!($stmt = $mysqli->prepare("UPDATE `tb_user` SET `firstname` = ?, `lastname` = ?, `age` = ?, `height` = ?, `aim_date` = ?, `aim_weight` = ? WHERE `tb_user`.`ID` = ?;"))) {
+        if (!($stmt = $mysqli->prepare("UPDATE `tb_user` SET `firstname` = ?, `lastname` = ?, `age` = ?, `height` = ?, `aim_date` = ?, `aim_weight` = ?, `gender` = ? WHERE `tb_user`.`ID` = ?;"))) {
              echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
         }
 
-        if (!$stmt->bind_param("ssidsdi", $firstname, $lastname, $age, $height, $aim_date, $aim_weight, $session_userid)) {
+        if (!$stmt->bind_param("ssidsdii", $firstname, $lastname, $age, $height, $aim_date, $aim_weight, $gender, $session_userid)) {
             echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
         }
 

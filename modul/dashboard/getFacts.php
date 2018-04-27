@@ -6,7 +6,7 @@
         include("../../include/session.php");
         include("../../include/database.php");
 
-        $sql = "SELECT age, height, weight, aim_date, aim_weight FROM tb_user WHERE ID = $session_userid";
+        $sql = "SELECT age, height, weight, aim_date, aim_weight, gender FROM tb_user WHERE ID = $session_userid";
         $sql2 = "SELECT weight FROM tb_user_weight WHERE tb_user_ID = $session_userid ORDER BY date_entered DESC LIMIT 2";
         $sql3 = "SELECT weight FROM tb_user_weight WHERE tb_user_ID = $session_userid ORDER BY date_entered ASC LIMIT 1";
 
@@ -18,6 +18,7 @@
             $user_height = $row['height'];
             $user_aimDate = $row['aim_date'];
             $user_aimWeight = $row['aim_weight'];
+            $user_gender = $row['gender'];
 
         }
 
@@ -50,55 +51,126 @@
 <div class="col-12">
     <div class="row">
 
+        <!-- Calculate the difference between the last 2 Entries -->
         <div class="col-lg-4">
-            <div class="card factCard">
+            <?php
+                if(is_numeric($oldWeight) && is_numeric($newWeight)){
+                    $echo = $newWeight - $oldWeight . " KG";
+                } else {
+                    $echo = "<h4>missing entry</h4>";
+                }
+            ?>
+            <div class="card factCard <?php if($echo < 0){echo "alert-success";}else if($echo > 0){echo "alert-danger";} ?>">
                 <div class="col-12">
-                    <b>Difference last 2 entries:</b>
+                    <b>Difference last 2 entries</b>
                 </div>
                 <div class="col-12 text-center">
                     <h2>
-                        <?php
-                            if(is_numeric($oldWeight) && is_numeric($newWeight)){
-                                echo $newWeight - $oldWeight . " KG";
-                            } else {
-                                echo "missing entry";
-                            }
-                        ?>
+                        <?php echo $echo; ?>
                     </h2>
                 </div>
             </div>
         </div>
+
+        <!-- Calculate the difference between the first and the last Entry -->
         <div class="col-lg-4">
-            <div class="card factCard">
+            <?php
+                if(is_numeric($newWeight) && is_numeric($user_start_weight)){
+                    $echo = $newWeight - $user_start_weight . " KG";
+                } else {
+                    $echo = "<h4>missing entry</h4>";
+                }
+            ?>
+            <div class="card factCard <?php if($echo < -10){echo "alert-success";} ?>">
                 <div class="col-12">
-                    <b>Difference first and latest entry:</b>
+                    <b>Difference first and latest entry</b>
                 </div>
                 <div class="col-12 text-center">
                     <h2>
-                        <?php
-                            if(is_numeric($newWeight) && is_numeric($user_start_weight)){
-                                echo $newWeight - $user_start_weight . " KG";
-                            } else {
-                                echo "missing entry";
-                            }
-                        ?>
+                        <?php echo $echo; ?>
                     </h2>
                 </div>
             </div>
         </div>
+
+        <!-- Calculate the difference between the current and target Weight -->
+        <div class="col-lg-4">
+            <?php
+
+                if(is_numeric($newWeight) && is_numeric($user_aimWeight)){
+                    $neededLoss = $user_aimWeight - $newWeight;
+                    $echo = $neededLoss." KG";
+                } else {
+                    $echo = "<h4>missing entry</h4>";
+                }
+
+            ?>
+            <div class="card factCard <?php if($echo >= -5){echo "alert-success";}else if($echo >= -10){echo "alert-primary";}else{echo "alert-danger";} ?>">
+                <div class="col-12">
+                    <b>Difference current - target weight</b>
+                </div>
+                <div class="col-12 text-center">
+                    <h2>
+                        <?php echo $echo; ?>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculate the BMI -->
+        <div class="col-lg-4">
+            <?php
+
+                if(is_numeric($newWeight) && is_numeric($user_height)){
+                    $echo = round($newWeight / (($user_height/100)*($user_height/100)), 2);
+                } else {
+                    $echo = "<h4>missing entry</h4>";
+                }
+
+            ?>
+            <div class="card factCard
+            <?php
+                if($echo < 24 && $echo > 17){
+                    echo "alert-success";
+                }else if($echo < 17 && $echo > 15 || $echo > 24 && $echo < 27){
+                    echo "alert-primary";
+                }else{
+                    echo "alert-danger";
+                }
+            ?>">
+                <div class="col-12">
+                    <b>Current BMI</b>
+                </div>
+                <div class="col-12 text-center">
+                    <h2>
+                        <?php echo $echo; ?>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculate daily till Aimed Date -->
         <div class="col-lg-4">
             <div class="card factCard">
                 <div class="col-12">
-                    <b>Difference current - target weight:</b>
+                    <b>Days till goal Date</b>
                 </div>
                 <div class="col-12 text-center">
                     <h2>
                         <?php
 
-                            if(is_numeric($newWeight) && is_numeric($user_aimWeight)){
-                                echo $user_aimWeight - $oldWeight ." KG";
+                            if($user_aimDate != ""){
+
+                                $now = time(); // or your date as well
+                                $your_date = strtotime($user_aimDate);
+                                $datediff = $your_date - $now;
+
+                                $daysToAim = round($datediff / (60 * 60 * 24));
+                                echo $daysToAim;
+                                //echo $user_aimDate;
+
                             } else {
-                                echo "missing entry";
+                                echo "<h4>missing entry</h4>";
                             }
 
                         ?>
@@ -106,50 +178,96 @@
                 </div>
             </div>
         </div>
+
+        <!-- Calculate the daily needed loss in KG -->
         <div class="col-lg-4">
-            <div class="card factCard">
+            <?php
+
+                if(isset($daysToAim) && is_numeric($daysToAim) && is_numeric($neededLoss)){
+                    $dailyNeededLoss = round($neededLoss/$daysToAim, 3);
+                    $echo = $dailyNeededLoss . " KG";
+                } else {
+                    $echo = "<h4>missing entry</h4>";
+                }
+
+            ?>
+            <div class="card factCard <?php if($echo < -0.210){ echo "alert-danger"; } ?>">
                 <div class="col-12">
-                    <b>Current BMI:</b>
+                    <b>Daily needed loss</b>
                 </div>
                 <div class="col-12 text-center">
                     <h2>
-                        20.5
+                        <?php echo $echo; ?>
                     </h2>
                 </div>
             </div>
         </div>
+
+        <!-- Calculate the calories daily needed normally (Kalorienbedarf) -->
         <div class="col-lg-4">
             <div class="card factCard">
                 <div class="col-12">
-                    <b>Days till goal Date:</b>
+                    <b>Daily calorie needs</b>
                 </div>
                 <div class="col-12 text-center">
                     <h2>
-                        95
+                        <?php
+
+                            if(is_numeric($newWeight) && is_numeric($user_height) && is_numeric($user_age)){
+
+                                if($user_gender == 0){
+                                    $dailyCalneeded = 66 + (13.8 * $newWeight) + (5.0 * $user_height) + (6.8 * $user_age); //Mans
+                                } else if ($user_gender == 1){
+                                    $dailyCalneeded = 655 + (9.5 * $newWeight) + (1.9 * $user_height) + (4.7 * $user_age); //Womans
+                                } else {
+                                    $dailyCalneeded = "No Gender found";
+                                }
+
+                                echo $dailyCalneeded;
+
+                            } else {
+                                echo "<h4>missing entry</h4>";
+                            }
+
+                        ?>
                     </h2>
                 </div>
             </div>
         </div>
+
+        <!-- Calculate the possible calories to reach aimed weight on aimed date -->
         <div class="col-lg-4">
-            <div class="card factCard">
+            <?php
+
+                if(isset($dailyNeededLoss) && is_numeric($dailyNeededLoss) && is_numeric($dailyCalneeded)){
+
+                    $neededLossInCal = 7000 * ($dailyNeededLoss);
+
+                    $dailyCalToReachAims = $dailyCalneeded - ((-1)*$neededLossInCal);
+
+                    $echo = $dailyCalToReachAims;
+
+                } else {
+                    $echo = "<h4>missing entry</h4>";
+                }
+
+            ?>
+            <div class="card factCard
+            <?php
+                if($echo >= 1000){
+                    echo "alert-success";
+                }else if($echo < 1000 && $echo >= 800){
+                    echo "alert-primary";
+                }else{
+                    echo "alert-danger";
+                }
+            ?>">
                 <div class="col-12">
-                    <b>Daily needed loss:</b>
+                    <b>Daily Calories to reach aims</b>
                 </div>
                 <div class="col-12 text-center">
                     <h2>
-                        0.2083 KG
-                    </h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card factCard">
-                <div class="col-12">
-                    <b>Daily Calories:</b>
-                </div>
-                <div class="col-12 text-center">
-                    <h2>
-                        850 Cal
+                        <?php echo $echo; ?>
                     </h2>
                 </div>
             </div>

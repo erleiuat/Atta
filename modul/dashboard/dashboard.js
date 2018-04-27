@@ -23,9 +23,37 @@ function delEntry(entryID){
 
 }
 
+function timeStamp() {
+
+    var now = new Date();
+
+    var date = [ now.getFullYear(), now.getMonth() + 1, now.getDate() ];
+    var time = [ now.getHours(), now.getMinutes(), now.getSeconds() ];
+
+    for ( var i = 1; i < 3; i++ ) {
+        if ( time[i] < 10 ) {
+            time[i] = "0" + time[i];
+        }
+    }
+
+    return date.join("-") + " " + time.join(":");
+    
+}
+
+function setTimestamp() {
+    setTimeout(function () {
+
+        $('#inputDate').val(timeStamp());
+
+        setTimestamp();
+    }, 1000);
+}
+
 $(document).ready(function(){
 
     reload();
+
+    setTimestamp();
 
     $('#addEntryButton').click(function(event){
 

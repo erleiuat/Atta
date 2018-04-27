@@ -40,11 +40,13 @@
                 </div>
             </div>
         </div>
-        <div class="row" id="entries">
 
-        </div>
         <div class="row" id="facts">
             <!-- GET FACTS -->
+        </div>
+
+        <div class="row" id="entries">
+            <!-- GET ENTRIES -->
         </div>
 
     </div>
