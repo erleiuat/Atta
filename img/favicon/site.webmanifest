@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Atta",
+    "short_name": "Atta",
     "icons": [
         {
             "src": "/img/favicon/android-chrome-192x192.png",
@@ -8,7 +8,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "theme_color": "#7FB8FF",
+    "background_color": "#7FB8FF",
     "display": "standalone"
 }
