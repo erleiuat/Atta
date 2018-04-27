@@ -59,15 +59,10 @@ function setTimestamp() {
 
 $(document).ready(function(){
 
-    reload(1);
-    $('#addEntryBox').slideDown('fast');
-
-    setTimestamp();
-
-    $('#addEntryButton').click(function(event){
+    function addEntry(){
 
         $('#errorAlert').fadeOut('fast');
-        $(this).prop('disabled', true);
+        $('#addEntryButton').prop('disabled', true);
         event.preventDefault();
         var date = $('#inputDate').val();
         var weight = $('#inputWeight').val();
@@ -85,7 +80,7 @@ $(document).ready(function(){
 
             $('#errorText').html(error);
             $('#errorAlert').fadeIn('fast');
-            $(this).prop('disabled', false);
+            $('#addEntryButton').prop('disabled', false);
 
         } else {
 
@@ -115,6 +110,22 @@ $(document).ready(function(){
         }
 
 
+    }
+
+    reload(1);
+    $('#addEntryBox').slideDown('fast');
+
+    setTimestamp();
+
+    /*$(document).keypress(function(e) {  ---> To be fixed
+        if(e.which == 13) {
+            addEntry();
+        }
+    });*/
+
+    $('#addEntryButton').click(function(event){
+        event.preventDefault();
+        addEntry();
     });
 
 });
