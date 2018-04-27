@@ -187,16 +187,16 @@
 
                 if(isset($daysToAim) && is_numeric($daysToAim) && is_numeric($neededLoss)){
                     $dailyNeededLoss = round($neededLoss/$daysToAim, 3);
-                    $echo = $dailyNeededLoss . " KG";
+                    $echoNeededLoss = $dailyNeededLoss . " KG";
                 } else {
-                    $echo = "<h4>missing entry</h4>";
+                    $echoNeededLoss = "<h4>missing entry</h4>";
                 }
 
             ?>
             <div class="card factCard <?php if($echo < -0.210){ echo "alert-danger"; } ?>">
                 <div class="col-12">
                     <?php
-                        if($echo <= 0){
+                        if($echoNeededLoss <= 0){
                             echo "<b>Daily needed <i>loss</i></b>";
                         } else {
                             echo "<b>Daily needed <i>gain</i></b>";
@@ -205,7 +205,7 @@
                 </div>
                 <div class="col-12 text-center">
                     <h2>
-                        <?php echo $echo; ?>
+                        <?php echo $echoNeededLoss; ?>
                     </h2>
                 </div>
             </div>
@@ -273,7 +273,15 @@
                 }
             ?>">
                 <div class="col-12">
-                    <b>Daily max. calories to reach aims</b> <a href="#" data-toggle="tooltip" data-placement="right" title="With this amount of calories per day you'll achive your weight goal on the chosen day">
+                    <b>
+                        <?php
+                            if($echoNeededLoss <= 0){
+                                echo "Daily <i>max.</i> calories to reach aims";
+                            } else {
+                                echo "Daily <i>min.</i> calories to reach aims";
+                            }
+                        ?>
+                    </b> <a href="#" data-toggle="tooltip" data-placement="right" title="With this amount of calories per day you'll achive your weight goal on the chosen day">
                         <i class="far fa-question-circle"></i>
                     </a>
                 </div>
