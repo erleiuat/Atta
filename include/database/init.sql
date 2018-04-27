@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 27. Apr 2018 um 09:49
+-- Erstellungszeit: 27. Apr 2018 um 13:48
 -- Server-Version: 10.1.30-MariaDB
 -- PHP-Version: 7.2.2
 
@@ -41,11 +41,12 @@ CREATE TABLE `tb_modul` (
 --
 
 INSERT INTO `tb_modul` (`ID`, `title`, `url`, `secured`, `description`) VALUES
-(1, 'Dashboard', 'modul/dashboard/dashboard.php', 1, NULL),
-(2, 'Login', 'modul/login/login.php', 0, NULL),
-(3, 'Register', 'modul/register/register.php', 0, NULL),
-(4, 'Settings', 'modul/settings/settings.php', 1, NULL),
-(5, 'Logout', 'modul/logout/logout.php', 1, NULL);
+(1, '<i class=\"far fa-clipboard\"></i> Dashboard', 'modul/dashboard/dashboard.php', 1, NULL),
+(2, '<i class=\"fas fa-sign-in-alt\"></i> Login', 'modul/login/login.php', 0, NULL),
+(3, '<i class=\"far fa-plus-square\"></i> Register', 'modul/register/register.php', 0, NULL),
+(4, '<i class=\"fas fa-sliders-h\"></i> Settings', 'modul/settings/settings.php', 1, NULL),
+(5, '<i class=\"fas fa-sign-out-alt\"></i> Logout', 'modul/logout/logout.php', 1, NULL),
+(6, '<i class=\"fas fa-question\"></i> FAQ', 'modul/faq/faq.php', 1, 'Frequently Asked Questing and more');
 
 -- --------------------------------------------------------
 
@@ -66,8 +67,6 @@ CREATE TABLE `tb_user` (
   `aim_weight` double DEFAULT NULL,
   `gender` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
 
 --
 -- Tabellenstruktur für Tabelle `tb_user_weight`
@@ -113,19 +112,19 @@ ALTER TABLE `tb_user_weight`
 -- AUTO_INCREMENT für Tabelle `tb_modul`
 --
 ALTER TABLE `tb_modul`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT für Tabelle `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT für Tabelle `tb_user_weight`
 --
 ALTER TABLE `tb_user_weight`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- Constraints der exportierten Tabellen
