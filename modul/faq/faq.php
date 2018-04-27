@@ -45,9 +45,10 @@
                 </p>
                 <hr/>
 
-                <h3>Other Questions/Suggestions?</h3>
+                <h3>Other Questions or Suggestions?</h3>
                 <p>
-                    <a href="https://eliareutlinger.ch/"><i class="fas fa-arrow-right"></i> Contact me</a>
+                    <a href="https://eliareutlinger.ch/"><i class="fas fa-external-link-alt"></i> Contact me</a><br/>
+                    <a href="https://github.com/eliareutlinger/Atta"><i class="fab fa-github"></i></i> View on Github</a>
                 </p>
             </div>
         </div>

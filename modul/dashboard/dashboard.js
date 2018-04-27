@@ -1,14 +1,14 @@
 function reload(onstart){
-        $('#facts').load( "modul/dashboard/getFacts.php", function(){
-            if(onstart){
-                $('#facts').slideDown('slow');
-            }
-        });
-        $('#entries').load( "modul/dashboard/getEntries.php", function(){
-            if(onstart){
-                $('#entries').slideDown('slow');
-            }
-        });
+    $('#facts').load( "modul/dashboard/getFacts.php", function(){
+        if(onstart){
+            $('#facts').slideDown('slow');
+        }
+    });
+    $('#entries').load( "modul/dashboard/getEntries.php", function(){
+        if(onstart){
+            $('#entries').slideDown('slow');
+        }
+    });
 }
 
 function delEntry(entryID){
@@ -50,9 +50,7 @@ function timeStamp() {
 
 function setTimestamp() {
     setTimeout(function () {
-
         $('#inputDate').val(timeStamp());
-
         setTimestamp();
     }, 1000);
 }

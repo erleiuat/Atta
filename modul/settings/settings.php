@@ -94,6 +94,18 @@
             </div>
 
         </div>
+        <div class="col-lg-6">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-4 col-4">
+                    <a href="atta_mobile.apk" target="_blank"><img src="img/app.png" class="img-thumbnail img-fluid" /></a>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-8 col-8">
+                    <a href="atta_mobile.apk" target="_blank">Download Atta for Android!</a><br/>
+                    - Longer Session<br/>
+                    - Beautiful Icon
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 <script type="text/javascript" src="modul/settings/settings.min.js"></script>
