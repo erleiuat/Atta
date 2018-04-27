@@ -25,12 +25,12 @@ You can setup the App on your own or just use it [here](https://atta.eliareutlin
 ## Impressions
 <br/>
 <div style="text-align:center">
- <b>Dashboard</b>
+ <b>Dashboard</b><br/>
  <img src="https://raw.githubusercontent.com/eliareutlinger/Atta/master/img/readme/dashboard.JPG" />
 </div>
 
 <br/>
 <div style="text-align:center">
- <b>Settings</b>
+ <b>Settings</b><br/>
  <img width="60%" src="https://raw.githubusercontent.com/eliareutlinger/Atta/master/img/readme/settings.JPG" />
 </div>
