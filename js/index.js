@@ -5,7 +5,6 @@ function makeDynamic(objectThis){
         event.preventDefault();
         $("#pageContent").fadeOut(50, function(){
             var newUrl = href.replace('modul/','').replace('.php','');
-            window.history.pushState("", "Title", "?page=" + newUrl);
             goBack(href);
         });
     });

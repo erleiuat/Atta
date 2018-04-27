@@ -26,7 +26,7 @@ $(document).ready(function(){
             error += "<li>Please enter a correct E-Mail</li>";
         }
 
-        if(password < 6){
+        if(password < 8){
             error += "<li>Please use a password with at least 8 digits</li>";
         } else {
             if(password != password2){
