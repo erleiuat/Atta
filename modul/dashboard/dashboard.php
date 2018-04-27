@@ -15,9 +15,9 @@
 <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
     <div class="my-auto col-12">
 
-        <h1 class="mb-0">
+        <h2 class="mb-0">
             <span class="text-primary">Board</span>
-        </h1>
+        </h2>
         <br/>
         <div class="row">
             <div class="col-lg-6 offset-lg-3">

@@ -13,7 +13,7 @@
 <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
     <div class="my-auto">
 
-        <h1 class="mb-0">Settings</h1>
+        <h2 class="mb-0">Settings</h2>
         <div class="row">
 
             <div class="col-12">

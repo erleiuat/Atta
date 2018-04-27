@@ -11,9 +11,9 @@
 <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
     <div class="my-auto">
 
-        <h1 class="mb-0">Atta
+        <h2 class="mb-0 text-center">Atta
             <span class="text-primary">Register</span>
-        </h1>
+        </h2>
         <br/>
         <div class="row">
             <div class="col-10 offset-1">

@@ -16,6 +16,8 @@
                 include("../../include/session.php");
                 include("../../include/database.php");
 
+                $i = 1;
+
                 $sql = "SELECT ID, date_entered, weight FROM tb_user_weight WHERE tb_user_ID = $session_userid ORDER BY date_entered DESC";
                 $res = $mysqli->query($sql);
 
@@ -24,12 +26,14 @@
 
                         echo '
                         <tr>
-                            <th scope="row">'.$row['ID'].'</th>
+                            <th scope="row">'.$i.'</th>
                             <td>'.$row['date_entered'].'</td>
                             <td>'.$row['weight'].'</td>
                             <td><a onclick="delEntry('.$row['ID'].')"><i style="cursor: pointer;" class="far fa-trash-alt"></i></a></td>
                         </tr>
                         ';
+
+                        $i += 1;
 
                     }
                 } else {
