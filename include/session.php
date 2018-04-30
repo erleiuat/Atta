@@ -6,13 +6,10 @@
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) {
 
             if(!$_SESSION['user']['keepLogin']){
-                echo "Nice";
                 session_destroy();
                 $session_loggedin = false;
                 echo '<script type="text/javascript">parent.window.location.reload();</script>';
                 exit();
-            } else {
-                echo "Naninu";
             }
 
         } else {
