@@ -55,7 +55,8 @@
 
             $_SESSION['user'] = array(
                 'email'  => $email,
-                'id' => $row[0]
+                'id' => $row[0],
+                'keepLogin' => $_POST['keepLogin']
             );
 
         }

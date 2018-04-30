@@ -15,12 +15,22 @@
             <div class="col-10 offset-1">
                 <form>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
+                        <label for="inputMail">Email address</label>
                         <input type="email" class="form-control" id="inputMail" placeholder="Enter email">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Password</label>
+                        <label for="inputPassword">Password</label>
                         <input type="password" class="form-control" id="inputPassword" placeholder="Enter Password">
+                    </div>
+                    <div class="form-group col-12">
+                        <div class="row">
+                            <div class="col-2">
+                                <input type="checkbox" class="form-control" style="margin-top:5px;" id="inputKeep" value="true">
+                            </div>
+                            <div class="col-10">
+                                <label for="inputKeep">Keep me logged in</label>
+                            </div>
+                        </div>
                     </div>
                     <button type="submit" id="loginButton" class="btn btn-primary">Login</button>
                 </form>
