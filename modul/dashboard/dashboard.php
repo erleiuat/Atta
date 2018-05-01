@@ -20,17 +20,57 @@
         </h2>
         <br/>
         <div class="row">
-            <div class="col-lg-6 offset-lg-3">
-                <div class="card" id="addEntryBox" style="display: none;">
+            <div class="col-lg-6">
+                <div class="card" id="addEntryBox">
                     <div class="col-12 text-center">
-                        <h4>Add entry</h4>
+                        <h4>Add Calories <i class="fas fa-sort-amount-up"></i></h4>
+                        <form>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="inputCalTitle">Title</label>
+                                        <input type="text" class="form-control" id="inputCalTitle" placeholder="What did you eat? (Optional)">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="inputCalDate">Date & Time</label>
+                                        <input type="datetime" class="form-control" id="inputCalDate" value="<?php echo $timeNow; ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="inputCalAmount">Amount</label>
+                                        <input type="datetime" class="form-control" id="inputCalAmount" value="1">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="inputCal">Calories</label>
+                                        <input type="number" class="form-control" id="inputCal" placeholder="Calories">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-default btn-block" id="addCalButton">Add</button>
+                            <br/>
+                        </form>
+                    </div>
+                </div>
+                <br/>
+            </div>
+            <div class="col-lg-6">
+                <div class="card" id="addEntryBox">
+                    <div class="col-12 text-center">
+                        <h4>Add Weight <i class="fas fa-weight"></i></h4>
                         <form>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Date & Time</label>
+                                <label for="inputDate">Date & Time</label>
                                 <input type="datetime" class="form-control" id="inputDate" value="<?php echo $timeNow; ?>">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Weight</label>
+                                <label for="inputWeight">Weight</label>
                                 <input type="number" class="form-control" id="inputWeight" placeholder="Your Weight">
                             </div>
                             <button type="button" class="btn btn-default btn-block" id="addEntryButton">Add</button>

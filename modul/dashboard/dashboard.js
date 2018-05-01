@@ -53,15 +53,79 @@ function setTimestamp() {
         $('#inputDate').val(timeStamp());
         setTimestamp();
     }, 1000);
+    setTimeout(function () {
+        $('#inputCalDate').val(timeStamp());
+        setTimestamp();
+    }, 1000);
 }
 
 $(document).ready(function(){
+
+    function addCalEntry(){
+
+        $('#errorAlert').fadeOut('fast');
+        $('#addCalButton').prop('disabled', true);
+
+        var title = $('#inputCalTitle').val();
+        var date = $('#inputCalDate').val();
+        var amount = $('#inputCalAmount').val();
+        var calories = $('#inputCal').val();
+        var error = "";
+
+        if(date < 8){
+            error += "<li>Please enter a Date</li>";
+        }
+
+        if(amount < 0){
+            error += "<li>Please enter a correct Amount</li>";
+        }
+
+        if(calories < 1){
+            error += "<li>Please enter Calories</li>";
+        }
+
+        if(error != ""){
+
+            $('#errorText').html(error);
+            $('#errorAlert').fadeIn('fast');
+            $('#addCalButton').prop('disabled', false);
+
+        } else {
+
+            $.ajax({
+                type: "POST",
+                data: {date:date, amount:amount, title:title, calories:calories},
+                url: "modul/dashboard/addCalories.php",
+                success: function(data){
+                    if(data){
+                        $('#errorText').html(data);
+                        $('#errorAlert').fadeIn('fast');
+                        $('#addCalButton').prop('disabled', false);
+                    } else {
+                        $('#successText').html("Successfully Added.");
+                        $('#successAlert').fadeIn('fast').delay(2000).fadeOut('fast');
+
+                        reload();
+
+                        $('#inputCalTitle').val("");
+                        $('#inputCalDate').val("");
+                        $('#inputCalAmount').val("1");
+                        $('#inputCal').val("");
+                        $('#addCalButton').prop('disabled', false);
+
+                    }
+                }
+            });
+
+        }
+
+    }
 
     function addEntry(){
 
         $('#errorAlert').fadeOut('fast');
         $('#addEntryButton').prop('disabled', true);
-        event.preventDefault();
+
         var date = $('#inputDate').val();
         var weight = $('#inputWeight').val();
         var error = "";
@@ -124,6 +188,11 @@ $(document).ready(function(){
     $('#addEntryButton').click(function(event){
         event.preventDefault();
         addEntry();
+    });
+
+    $('#addCalButton').click(function(event){
+        event.preventDefault();
+        addCalEntry();
     });
 
 });

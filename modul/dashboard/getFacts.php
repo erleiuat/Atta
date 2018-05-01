@@ -9,6 +9,7 @@
         $sql = "SELECT age, height, weight, aim_date, aim_weight, gender FROM tb_user WHERE ID = $session_userid";
         $sql2 = "SELECT weight FROM tb_user_weight WHERE tb_user_ID = $session_userid ORDER BY date_entered DESC LIMIT 2";
         $sql3 = "SELECT weight FROM tb_user_weight WHERE tb_user_ID = $session_userid ORDER BY date_entered ASC LIMIT 1";
+        $sql4 = "SELECT * FROM `tb_user_cal` where entryDate >= CAST(CURRENT_TIMESTAMP AS DATE) AND tb_user_ID = $session_userid";
 
         $res = $mysqli->query($sql);
         if (isset($res) && $res->num_rows > 0) {
@@ -288,6 +289,55 @@
                 <div class="col-12 text-center">
                     <h2>
                         <?php echo $echo; ?>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculate the today still available cals -->
+        <div class="col-lg-4">
+            <?php
+
+                if(isset($dailyCalToReachAims) && is_numeric($dailyCalToReachAims)){
+
+                    $caloriesUsed = 0;
+
+                    $res = $mysqli->query($sql4);
+                    if (isset($res) && $res->num_rows > 0) {
+                        while($row = $res->fetch_assoc()){
+
+                            $caloriesUsed += $row['calories']*$row['amount'];
+
+                        }
+                    }
+
+                    $echo = $dailyCalToReachAims - $caloriesUsed;
+
+                } else {
+                    $echo = "<h4>missing entry</h4>";
+                }
+
+
+
+            ?>
+            <div class="card factCard
+            <?php
+                if($echo > 200){
+                    echo "alert-success";
+                }else if($echo <= 200 && $echo >= 0){
+                    echo "alert-primary";
+                }else{
+                    echo "alert-danger";
+                }
+            ?>">
+                <div class="col-12">
+                    <b>Still available Calories </b> <a href="#" data-toggle="tooltip" data-placement="right" title="Thats what you still can eat today.">
+                        <i class="far fa-question-circle"></i>
+                    </a>
+                </div>
+                <div class="col-12 text-center">
+                    <h2>
+                        <?php echo round($echo, 2); ?>
                     </h2>
                 </div>
             </div>
