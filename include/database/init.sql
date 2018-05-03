@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 27. Apr 2018 um 13:48
+-- Erstellungszeit: 03. Mai 2018 um 14:53
 -- Server-Version: 10.1.30-MariaDB
 -- PHP-Version: 7.2.2
 
@@ -46,7 +46,8 @@ INSERT INTO `tb_modul` (`ID`, `title`, `url`, `secured`, `description`) VALUES
 (3, '<i class=\"far fa-plus-square\"></i> Register', 'modul/register/register.php', 0, NULL),
 (4, '<i class=\"fas fa-sliders-h\"></i> Settings', 'modul/settings/settings.php', 1, NULL),
 (5, '<i class=\"fas fa-sign-out-alt\"></i> Logout', 'modul/logout/logout.php', 1, NULL),
-(6, '<i class=\"fas fa-question\"></i> FAQ', 'modul/faq/faq.php', 1, 'Frequently Asked Questing and more');
+(6, '<i class=\"fas fa-question\"></i> FAQ', 'modul/faq/faq.php', 1, 'Frequently Asked Questing and more'),
+(7, '<i class=\"fas fa-sort-amount-down\"></i> Calories', 'modul/calories/calories.php', 1, 'All Cals listed');
 
 -- --------------------------------------------------------
 
@@ -67,6 +68,23 @@ CREATE TABLE `tb_user` (
   `aim_weight` double DEFAULT NULL,
   `gender` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `tb_user_cal`
+--
+
+CREATE TABLE `tb_user_cal` (
+  `ID` int(11) NOT NULL,
+  `entryDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `amount` double NOT NULL,
+  `calories` double NOT NULL,
+  `tb_user_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
 
 --
 -- Tabellenstruktur für Tabelle `tb_user_weight`
@@ -98,6 +116,13 @@ ALTER TABLE `tb_user`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indizes für die Tabelle `tb_user_cal`
+--
+ALTER TABLE `tb_user_cal`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `tb_user_ID` (`tb_user_ID`);
+
+--
 -- Indizes für die Tabelle `tb_user_weight`
 --
 ALTER TABLE `tb_user_weight`
@@ -112,23 +137,35 @@ ALTER TABLE `tb_user_weight`
 -- AUTO_INCREMENT für Tabelle `tb_modul`
 --
 ALTER TABLE `tb_modul`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT für Tabelle `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT für Tabelle `tb_user_cal`
+--
+ALTER TABLE `tb_user_cal`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT für Tabelle `tb_user_weight`
 --
 ALTER TABLE `tb_user_weight`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints der exportierten Tabellen
 --
+
+--
+-- Constraints der Tabelle `tb_user_cal`
+--
+ALTER TABLE `tb_user_cal`
+  ADD CONSTRAINT `tb_user_cal_ibfk_1` FOREIGN KEY (`tb_user_ID`) REFERENCES `tb_user` (`ID`);
 
 --
 -- Constraints der Tabelle `tb_user_weight`
