@@ -29,7 +29,16 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="inputCalTitle">Title</label>
-                                        <input type="text" class="form-control" id="inputCalTitle" placeholder="What did you eat? (Optional)">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <button type="button" id="searchCal" class="btn btn-default" style="">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-10">
+                                                <input type="text" class="form-control" id="inputCalTitle" placeholder="What did you eat? (Optional)">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">

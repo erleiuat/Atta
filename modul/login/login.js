@@ -19,12 +19,6 @@ $(document).ready(function(){
             error += "<li>Please enter a correct Password</li>";
         }
 
-        if($('#inputKeep').is(':checked')){
-            var keepLogin = true;
-        } else {
-            var keepLogin = false;
-        }
-
         if(error != ""){
 
             $('#errorText').html(error);
@@ -35,7 +29,7 @@ $(document).ready(function(){
 
             $.ajax({
                 type: "POST",
-                data: {email:email, password:password, keepLogin:keepLogin},
+                data: {email:email, password:password},
                 url: "modul/login/loginUser.php",
                 success: function(data){
                     if(data){

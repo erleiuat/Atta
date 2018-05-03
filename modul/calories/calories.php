@@ -24,6 +24,7 @@
                             <th scope="col">Date | Time</th>
                             <th scope="col">Amount</th>
                             <th scope="col">Calories (p.p.)</th>
+                            <th scope="col">Calories (total)</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -43,6 +44,7 @@
                                         <td>'.$row['entryDate'].'</td>
                                         <td>'.$row['amount'].'</td>
                                         <td>'.$row['calories'].'</td>
+                                        <td>'.$row['calories']*$row['amount'].'</td>
                                         <td class="deleteCalEntry" id="'.$row['ID'].'"><i style="cursor:pointer;" class="far fa-trash-alt"></i></td>
                                     </tr>
                                     ';

@@ -49,13 +49,10 @@ function timeStamp() {
 }
 
 function setTimestamp() {
-    setTimeout(function () {
-        $('#inputDate').val(timeStamp());
-        setTimestamp();
-    }, 1000);
-    setTimeout(function () {
-        $('#inputCalDate').val(timeStamp());
-        setTimestamp();
+    setInterval(function () {
+        var currentStamp = timeStamp();
+        $('#inputDate').val(currentStamp);
+        $('#inputCalDate').val(currentStamp);
     }, 1000);
 }
 

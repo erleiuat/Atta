@@ -3,14 +3,12 @@
     session_start();
 
     if(isset($_SESSION['user'])){
-        if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) {
+        if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 172800)) {
 
-            if(!$_SESSION['user']['keepLogin']){
-                session_destroy();
-                $session_loggedin = false;
-                echo '<script type="text/javascript">parent.window.location.reload();</script>';
-                exit();
-            }
+            session_destroy();
+            $session_loggedin = false;
+            echo '<script type="text/javascript">parent.window.location.reload();</script>';
+            exit();
 
         } else {
 

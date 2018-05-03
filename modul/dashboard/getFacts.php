@@ -186,7 +186,7 @@
         <div class="col-lg-4">
             <?php
 
-                if(isset($daysToAim) && is_numeric($daysToAim) && is_numeric($neededLoss)){
+                if(isset($daysToAim) && isset($neededLoss) && is_numeric($daysToAim) && is_numeric($neededLoss)){
                     $dailyNeededLoss = round($neededLoss/$daysToAim, 3);
                     $echoNeededLoss = $dailyNeededLoss . " KG";
                 } else {
