@@ -56,7 +56,7 @@
         <div class="col-lg-4">
             <?php
                 if(is_numeric($oldWeight) && is_numeric($newWeight)){
-                    $echo = $newWeight - $oldWeight . " KG";
+                    $echo = round($newWeight - $oldWeight,2) . " KG";
                 } else {
                     $echo = "<h4>missing entry</h4>";
                 }
@@ -77,7 +77,7 @@
         <div class="col-lg-4">
             <?php
                 if(is_numeric($newWeight) && is_numeric($user_start_weight)){
-                    $echo = $newWeight - $user_start_weight . " KG";
+                    $echo = round($newWeight - $user_start_weight,2) . " KG";
                 } else {
                     $echo = "<h4>missing entry</h4>";
                 }
@@ -100,7 +100,7 @@
 
                 if(is_numeric($newWeight) && is_numeric($user_aimWeight)){
                     $neededLoss = $user_aimWeight - $newWeight;
-                    $echo = $neededLoss." KG";
+                    $echo = round($neededLoss)." KG";
                 } else {
                     $echo = "<h4>missing entry</h4>";
                 }
@@ -234,7 +234,7 @@
                                     $dailyCalneeded = "No Gender found";
                                 }
 
-                                echo $dailyCalneeded;
+                                echo round($dailyCalneeded,2);
 
                             } else {
                                 echo "<h4>missing entry</h4>";
@@ -256,7 +256,7 @@
 
                     $dailyCalToReachAims = $dailyCalneeded - ((-1)*$neededLossInCal);
 
-                    $echo = $dailyCalToReachAims;
+                    $echo = round($dailyCalToReachAims);
 
                 } else {
                     $echo = "<h4>missing entry</h4>";
