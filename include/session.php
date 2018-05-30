@@ -3,7 +3,7 @@
     session_start();
 
     if(isset($_SESSION['user'])){
-        if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 172800)) {
+        if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 604800)) {
 
             session_destroy();
             $session_loggedin = false;
