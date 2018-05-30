@@ -102,7 +102,7 @@
                     $neededLoss = $user_aimWeight - $newWeight;
                     $echo = round($neededLoss)." KG";
                 } else {
-                    $echo = "<h4>missing entry</h4>";
+                    $echo = "<h4>missing entry</h4><script type='text/javascript'>dataCheck();</script>";
                 }
 
             ?>

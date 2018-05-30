@@ -56,6 +56,12 @@ function setTimestamp() {
     }, 1000);
 }
 
+function dataCheck(){
+    $('#errorText').html("<b>Welcome! Seems like you are missing some values here. Be sure to complete your <a class='dynLink' href='modul/settings/settings.php'>Settings</a> first!</b>");
+    $('#errorAlert').fadeIn('slow');
+    makeDynamic('.dynLink');
+}
+
 $(document).ready(function(){
 
     function addCalEntry(){
