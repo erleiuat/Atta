@@ -8,7 +8,7 @@
 
         $sql = "SELECT age, height, weight, aim_date, aim_weight, gender FROM tb_user WHERE ID = $session_userid";
         $sql2 = "SELECT weight FROM tb_user_weight WHERE tb_user_ID = $session_userid ORDER BY date_entered DESC LIMIT 2";
-        $sql3 = "SELECT weight FROM tb_user_weight WHERE tb_user_ID = $session_userid ORDER BY date_entered ASC LIMIT 1";
+        $sql3 = "SELECT weight, date_entered FROM tb_user_weight WHERE tb_user_ID = $session_userid ORDER BY date_entered ASC LIMIT 1";
         $sql4 = "SELECT * FROM `tb_user_cal` where entryDate >= CAST(CURRENT_TIMESTAMP AS DATE) AND tb_user_ID = $session_userid";
 
         $res = $mysqli->query($sql);
@@ -44,6 +44,7 @@
             $row = $res->fetch_assoc();
 
             $user_start_weight = $row['weight'];
+            $user_start_weight_date = $row['date_entered'];
 
         }
 
@@ -84,12 +85,17 @@
             ?>
             <div class="card factCard <?php if($echo < -10){echo "alert-success";} ?>">
                 <div class="col-12">
-                    <b>Difference first and latest entry</b>
+                    <b>Difference first and oldest entry</b>
                 </div>
                 <div class="col-12 text-center">
                     <h2>
                         <?php echo $echo; ?>
                     </h2>
+                    <?php
+                        $your_date = strtotime(substr($user_start_weight_date, 0, -9));;
+                        $datediff = time() - $your_date;
+                        echo "In ".( round($datediff / (60 * 60 * 24)) - 1 ). " Days";
+                    ?>
                 </div>
             </div>
         </div>
@@ -114,6 +120,37 @@
                     <h2>
                         <?php echo $echo; ?>
                     </h2>
+
+                    <?php
+
+                        if($user_aimDate != ""){
+
+                            $now = time(); // or your date as well
+                            $your_date = strtotime($user_aimDate);
+                            $datediff = $your_date - $now;
+
+                            $daysToAim = round($datediff / (60 * 60 * 24));
+
+                            if(isset($daysToAim) && isset($neededLoss) && is_numeric($daysToAim) && is_numeric($neededLoss)){
+                                $dailyNeededLoss = round($neededLoss/$daysToAim, 3);
+                                if($dailyNeededLoss <= 0){
+                                    $echoNeededLoss = "Lose " .$dailyNeededLoss . " KG for ".$daysToAim." Days to reach aims";
+                                } else {
+                                    $echoNeededLoss = "Gain " .$dailyNeededLoss . " KG for ".$daysToAim." Days to reach aims";
+                                }
+
+                            } else {
+                                $echoNeededLoss = $daysToAim;
+                            }
+
+                        }
+
+                        if(isset($echoNeededLoss)){
+                            echo $echoNeededLoss;
+                        }
+
+                    ?>
+
                 </div>
             </div>
         </div>
@@ -148,100 +185,7 @@
                     <h2>
                         <?php echo $echo; ?>
                     </h2>
-                </div>
-            </div>
-        </div>
-
-        <!-- Calculate daily till Aimed Date -->
-        <div class="col-lg-4">
-            <div class="card factCard">
-                <div class="col-12">
-                    <b>Days till goal date</b>
-                </div>
-                <div class="col-12 text-center">
-                    <h2>
-                        <?php
-
-                            if($user_aimDate != ""){
-
-                                $now = time(); // or your date as well
-                                $your_date = strtotime($user_aimDate);
-                                $datediff = $your_date - $now;
-
-                                $daysToAim = round($datediff / (60 * 60 * 24));
-                                echo $daysToAim;
-                                //echo $user_aimDate;
-
-                            } else {
-                                echo "<h4>missing entry</h4>";
-                            }
-
-                        ?>
-                    </h2>
-                </div>
-            </div>
-        </div>
-
-        <!-- Calculate the daily needed loss in KG -->
-        <div class="col-lg-4">
-            <?php
-
-                if(isset($daysToAim) && isset($neededLoss) && is_numeric($daysToAim) && is_numeric($neededLoss)){
-                    $dailyNeededLoss = round($neededLoss/$daysToAim, 3);
-                    $echoNeededLoss = $dailyNeededLoss . " KG";
-                } else {
-                    $echoNeededLoss = "<h4>missing entry</h4>";
-                }
-
-            ?>
-            <div class="card factCard <?php if($echo < -0.210){ echo "alert-danger"; } ?>">
-                <div class="col-12">
-                    <?php
-                        if($echoNeededLoss <= 0){
-                            echo "<b>Daily needed <i>loss</i></b>";
-                        } else {
-                            echo "<b>Daily needed <i>gain</i></b>";
-                        }
-                    ?>
-                </div>
-                <div class="col-12 text-center">
-                    <h2>
-                        <?php echo $echoNeededLoss; ?>
-                    </h2>
-                </div>
-            </div>
-        </div>
-
-        <!-- Calculate the calories daily needed normally (Kalorienbedarf) -->
-        <div class="col-lg-4">
-            <div class="card factCard">
-                <div class="col-12">
-                    <b>Daily calorie needs/base</b> <a href="#" data-toggle="tooltip" data-placement="right" title="This is the amount of calories you usually need to neither lose nor gain any weight. Please note the instructions at 'FAQ'">
-                        <i class="far fa-question-circle"></i>
-                    </a>
-                </div>
-                <div class="col-12 text-center">
-                    <h2>
-                        <?php
-
-                            if(is_numeric($newWeight) && is_numeric($user_height) && is_numeric($user_age)){
-
-                                if($user_gender == 0){
-                                    $dailyCalneeded = 66 + (13.8 * $newWeight) + (5.0 * $user_height) + (6.8 * $user_age); //Mans
-                                } else if ($user_gender == 1){
-                                    $dailyCalneeded = 655 + (9.5 * $newWeight) + (1.9 * $user_height) + (4.7 * $user_age); //Womans
-                                } else {
-                                    $dailyCalneeded = "No Gender found";
-                                }
-
-                                echo round($dailyCalneeded,2);
-
-                            } else {
-                                echo "<h4>missing entry</h4>";
-                            }
-
-                        ?>
-                    </h2>
+                    Should be 20-25
                 </div>
             </div>
         </div>
@@ -249,6 +193,18 @@
         <!-- Calculate the possible calories to reach aimed weight on aimed date -->
         <div class="col-lg-4">
             <?php
+
+                if(is_numeric($newWeight) && is_numeric($user_height) && is_numeric($user_age)){
+
+                    if($user_gender == 0){
+                        $dailyCalneeded = 66 + (13.8 * $newWeight) + (5.0 * $user_height) + (6.8 * $user_age); //Mans
+                    } else if ($user_gender == 1){
+                        $dailyCalneeded = 655 + (9.5 * $newWeight) + (1.9 * $user_height) + (4.7 * $user_age); //Womans
+                    } else {
+                        $dailyCalneeded = "No Gender found";
+                    }
+
+                }
 
                 if(isset($dailyNeededLoss) && is_numeric($dailyNeededLoss) && is_numeric($dailyCalneeded)){
 
@@ -290,6 +246,7 @@
                     <h2>
                         <?php echo $echo; ?>
                     </h2>
+                    <?php echo "Your daily basal metabolism: ". $dailyCalneeded. " Calories";?>
                 </div>
             </div>
         </div>
@@ -339,6 +296,7 @@
                     <h2>
                         <?php echo round($echo, 2); ?>
                     </h2>
+                    <?php echo "Already took ". $caloriesUsed . " today"; ?>
                 </div>
             </div>
         </div>
