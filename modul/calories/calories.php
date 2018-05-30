@@ -21,10 +21,10 @@
                         <thead>
                             <tr>
                                 <th scope="col">Title</th>
-                                <th scope="col">Date | Time</th>
+                                <th scope="col">Date/Time</th>
                                 <th scope="col">Amount</th>
                                 <th scope="col">Calories (p.p.)</th>
-                                <th scope="col">Calories (total)</th>
+                                <th scope="col">Total</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -71,7 +71,7 @@
                                                 $tmpCalSum += $row['calories']*$row['amount'];
                                                 $tmpEntry .= '
                                                 <tr class="removableEntry" style="display:none;" id="'.$row['ID'].'" dayID="'.$dates.'">
-                                                    <th scope="row">'.$row['title'].'</th>
+                                                    <td scope="row">'.$row['title'].'</th>
                                                     <td>'.substr($row['entryDate'], -8, -3).'</td>
                                                     <td>'.$row['amount'].'</td>
                                                     <td>'.$row['calories'].'</td>
@@ -87,7 +87,7 @@
                                             $tmpCalSum += $row['calories']*$row['amount'];
                                             $tmpEntry .= '
                                             <tr class="removableEntry" style="display:none;" id="'.$row['ID'].'" dayID="'.$dates.'">
-                                                <th scope="row">'.$row['title'].'</th>
+                                                <td scope="row">'.$row['title'].'</th>
                                                 <td>'.substr($row['entryDate'], -8, -3).'</td>
                                                 <td>'.$row['amount'].'</td>
                                                 <td>'.$row['calories'].'</td>
