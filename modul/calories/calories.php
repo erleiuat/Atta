@@ -72,7 +72,7 @@
                                                 $tmpEntry .= '
                                                 <tr class="removableEntry" style="display:none;" id="'.$row['ID'].'" dayID="'.$dates.'">
                                                     <th scope="row">'.$row['title'].'</th>
-                                                    <td>'.$row['entryDate'].'</td>
+                                                    <td>'.substr($row['entryDate'], -8, -3).'</td>
                                                     <td>'.$row['amount'].'</td>
                                                     <td>'.$row['calories'].'</td>
                                                     <td>'.$row['calories']*$row['amount'].'</td>
@@ -88,7 +88,7 @@
                                             $tmpEntry .= '
                                             <tr class="removableEntry" style="display:none;" id="'.$row['ID'].'" dayID="'.$dates.'">
                                                 <th scope="row">'.$row['title'].'</th>
-                                                <td>'.$row['entryDate'].'</td>
+                                                <td>'.substr($row['entryDate'], -8, -3).'</td>
                                                 <td>'.$row['amount'].'</td>
                                                 <td>'.$row['calories'].'</td>
                                                 <td>'.$row['calories']*$row['amount'].'</td>
