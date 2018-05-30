@@ -85,7 +85,7 @@
             ?>
             <div class="card factCard <?php if($echo < -10){echo "alert-success";} ?>">
                 <div class="col-12">
-                    <b>Difference first and oldest entry</b>
+                    <b>Difference first and latest entry</b>
                 </div>
                 <div class="col-12 text-center">
                     <h2>
