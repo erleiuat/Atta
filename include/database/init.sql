@@ -48,7 +48,7 @@ INSERT INTO `tb_modul` (`ID`, `title`, `url`, `secured`, `description`) VALUES
 (5, '<i class=\"fas fa-sign-out-alt\"></i> Logout', 'modul/logout/logout.php', 1, NULL),
 (6, '<i class=\"fas fa-question\"></i> FAQ', 'modul/faq/faq.php', 1, 'Frequently Asked Questing and more'),
 (7, '<i class=\"fas fa-sort-amount-down\"></i> Calories', 'modul/calories/calories.php', 1, 'All Cals listed'),
-(7, '<i class="fas fa-weight"></i> Weights', 'modul/weights/weights.php', 1, 'All weights listed');
+(7, '<i class=\"fas fa-weight\"></i> Weights', 'modul/weights/weights.php', 1, 'All weights listed');
 
 -- --------------------------------------------------------
 

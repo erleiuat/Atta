@@ -41,7 +41,7 @@
                             while($row = $res->fetch_assoc()) {
 
                                 echo '
-                                <tr>
+                                <tr class="deletableEntry" entryID="'.$row['ID'].'">
                                     <th scope="row">'.$i.'</th>
                                     <td>'.substr($row['date_entered'], 0, -3).'</td>
                                     <td>'.$row['weight'].'</td>
@@ -207,4 +207,4 @@ $(document).ready(function(){
 
 });
 </script>
-<!--<script type="text/javascript" src="modul/weights/weights.min.js"></script>-->
+<script type="text/javascript" src="modul/weights/weights.min.js"></script>
