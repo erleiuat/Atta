@@ -25,8 +25,8 @@
         $error .= "<li>Please enter a Date</li>";
     }
 
-    if(!$amount){
-        $error .= "<li>Please enter an amount</li>";
+    if(!$amount || $amount < 1){
+        $amount = 1;
     }
 
     if(!$calories){

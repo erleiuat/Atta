@@ -52,7 +52,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="inputCalAmount">Amount</label>
-                                        <input type="number" class="form-control" id="inputCalAmount" value="1">
+                                        <input type="number" class="form-control" id="inputCalAmount" placeholder="1">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
