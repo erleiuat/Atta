@@ -18,7 +18,7 @@
 
                 $i = 1;
 
-                $sql = "SELECT ID, date_entered, weight FROM tb_user_weight WHERE tb_user_ID = $session_userid ORDER BY date_entered DESC";
+                $sql = "SELECT ID, date_entered, weight FROM tb_user_weight WHERE tb_user_ID = $session_userid ORDER BY date_entered DESC LIMIT 10";
                 $res = $mysqli->query($sql);
 
                 if (isset($res) && $res->num_rows > 0) {
@@ -27,7 +27,7 @@
                         echo '
                         <tr>
                             <th scope="row">'.$i.'</th>
-                            <td>'.$row['date_entered'].'</td>
+                            <td>'.substr($row['date_entered'], 0, -3).'</td>
                             <td>'.$row['weight'].'</td>
                             <td><a onclick="delEntry('.$row['ID'].')"><i style="cursor: pointer;" class="far fa-trash-alt"></i></a></td>
                         </tr>
