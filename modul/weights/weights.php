@@ -113,17 +113,26 @@ $(document).ready(function(){
 
                         while($row = $res->fetch_assoc()) {
                             if($i < 1){
+
+                                $firstdate = substr($row['date_entered'], 0, -9);
+                                $firstvalue = $row['weight'];
+
                                 echo '
                                 {
-                                    "date": "'.substr($row['date_entered'], 0, -9).'",
-                                    "value": '.$row['weight'].'
+                                    "date": "'.$firstdate.'",
+                                    "value": '.$firstvalue.'
                                 }
                                 ';
+
                             } else {
+
+                                $lastdate = substr($row['date_entered'], 0, -9);
+                                $lastvalue = $row['weight'];
+
                                 echo '
                                 , {
-                                    "date": "'.substr($row['date_entered'], 0, -9).'",
-                                    "value": '.$row['weight'].'
+                                    "date": "'.$lastdate.'",
+                                    "value": '.$lastvalue.'
                                 }
                                 ';
                             }
@@ -153,17 +162,15 @@ $(document).ready(function(){
                     "valueField": "value"
                 }],
                 "trendLines": [{
-                    "finalDate": "2012-01-11 12",
-                    "finalValue": 19,
-                    "initialDate": "2012-01-02 12",
-                    "initialValue": 10,
-                    "lineColor": "#CC0000"
-                }, {
-                    "finalDate": "2012-01-22 12",
-                    "finalValue": 10,
-                    "initialDate": "2012-01-17 12",
-                    "initialValue": 16,
-                    "lineColor": "#CC0000"
+                    <?php
+                        echo '
+                        "finalDate": "'.$lastdate.' 12",
+                        "finalValue": '.$lastvalue.',
+                        "initialDate": "'.$firstdate.' 12",
+                        "initialValue": '.$firstvalue.',
+                        "lineColor": "#CC0000"
+                        ';
+                    ?>
                 }],
                 "chartScrollbar": {
                     "scrollbarHeight":2,
