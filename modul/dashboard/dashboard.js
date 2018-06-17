@@ -36,7 +36,7 @@ function timeStamp() {
     var now = new Date();
 
     var date = [ now.getFullYear(), now.getMonth() + 1, now.getDate() ];
-    var time = [ now.getHours(), now.getMinutes()];
+    var time = [ now.getHours(), now.getMinutes(), now.getSeconds() ];
 
     for ( var i = 1; i < 3; i++ ) {
         if ( time[i] < 10 ) {
@@ -111,8 +111,7 @@ $(document).ready(function(){
                         reload();
 
                         $('#inputCalTitle').val("");
-                        $('#inputCalDate').val("");
-                        $('#inputCalAmount').val("1");
+                        $('#inputCalAmount').val("");
                         $('#inputCal').val("");
                         $('#addCalButton').prop('disabled', false);
 

@@ -9,7 +9,7 @@
         exit();
     }
 
-    $timeNow = date('Y-m-d H:i');
+    $timeNow = date('Y-m-d H:i:s');
 
 ?>
 <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
