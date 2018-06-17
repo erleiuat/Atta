@@ -36,7 +36,7 @@ function timeStamp() {
     var now = new Date();
 
     var date = [ now.getFullYear(), now.getMonth() + 1, now.getDate() ];
-    var time = [ now.getHours(), now.getMinutes(), now.getSeconds() ];
+    var time = [ now.getHours(), now.getMinutes()];
 
     for ( var i = 1; i < 3; i++ ) {
         if ( time[i] < 10 ) {
@@ -53,7 +53,7 @@ function setTimestamp() {
         var currentStamp = timeStamp();
         $('#inputDate').val(currentStamp);
         $('#inputCalDate').val(currentStamp);
-    }, 1000);
+    }, 300000);
 }
 
 function dataCheck(){
