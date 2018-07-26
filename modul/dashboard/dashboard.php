@@ -31,7 +31,7 @@
                                         <label for="inputCalTitle">Title</label>
                                         <div class="row">
                                             <div class="col-2">
-                                                <button type="button" id="searchCal" class="btn btn-default" style="">
+                                                <button type="button" id="searchCal" class="btn btn-default highlighter" style="">
                                                     <i class="fas fa-search"></i>
                                                 </button>
                                             </div>
@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-default btn-block" id="addCalButton">Add</button>
+                            <button type="button" class="btn btn-default btn-block highlighter" id="addCalButton">Add</button>
                             <br/>
                         </form>
                     </div>
@@ -82,7 +82,7 @@
                                 <label for="inputWeight">Weight</label>
                                 <input type="number" class="form-control" id="inputWeight" placeholder="Your Weight">
                             </div>
-                            <button type="button" class="btn btn-default btn-block" id="addEntryButton">Add</button>
+                            <button type="button" class="btn btn-default btn-block highlighter" id="addEntryButton">Add</button>
                             <br/>
                         </form>
                     </div>

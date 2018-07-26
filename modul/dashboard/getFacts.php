@@ -62,7 +62,7 @@
                     $echo = "<h4>missing entry</h4>";
                 }
             ?>
-            <div class="card factCard <?php if($echo < 0){echo "alert-success";}else if($echo > 0){echo "alert-danger";} ?>">
+            <div class="card highlighter factCard <?php if($echo < 0){echo "alert-success";}else if($echo > 0){echo "alert-danger";} ?>">
                 <div class="col-12">
                     <b>Difference last 2 entries</b>
                 </div>
@@ -83,7 +83,7 @@
                     $echo = "<h4>missing entry</h4>";
                 }
             ?>
-            <div class="card factCard <?php if($echo < -10){echo "alert-success";} ?>">
+            <div class="card highlighter factCard <?php if($echo < -10){echo "alert-success";} ?>">
                 <div class="col-12">
                     <b>Difference first and latest entry</b>
                 </div>
@@ -112,7 +112,7 @@
                 }
 
             ?>
-            <div class="card factCard <?php if($echo >= -5){echo "alert-success";}else if($echo >= -10){echo "alert-primary";}else{echo "alert-danger";} ?>">
+            <div class="card highlighter factCard <?php if($echo >= -5){echo "alert-success";}else if($echo >= -10){echo "alert-primary";}else{echo "alert-danger";} ?>">
                 <div class="col-12">
                     <b>Difference current & target weight</b>
                 </div>
@@ -166,7 +166,7 @@
                 }
 
             ?>
-            <div class="card factCard
+            <div class="card highlighter factCard
             <?php
                 if($echo < 24 && $echo > 17){
                     echo "alert-success";
@@ -219,7 +219,7 @@
                 }
 
             ?>
-            <div class="card factCard
+            <div class="card highlighter factCard
             <?php
                 if($echo >= 1000){
                     echo "alert-success";
@@ -277,7 +277,7 @@
 
 
             ?>
-            <div class="card factCard
+            <div class="card highlighter factCard
             <?php
                 if($echo > 200){
                     echo "alert-success";
