@@ -1,10 +1,10 @@
 function reload(onstart){
-    $('#facts').load( "modul/dashboard/getFacts.php", function(){
+    $('#facts').load( "modul/dashboard/call/getFacts.php", function(){
         if(onstart){
             $('#facts').slideDown('slow');
         }
     });
-    $('#entries').load( "modul/dashboard/getEntries.php", function(){
+    $('#entries').load( "modul/dashboard/call/getEntries.php", function(){
         if(onstart){
             $('#entries').slideDown('slow');
         }
@@ -16,7 +16,7 @@ function delEntry(entryID){
     $.ajax({
         type: "POST",
         data: {entryID:entryID},
-        url: "modul/dashboard/removeWeight.php",
+        url: "modul/dashboard/call/removeWeight.php",
         success: function(data){
             if(data){
                 $('#errorText').html(data);
@@ -64,6 +64,10 @@ function dataCheck(){
 
 $(document).ready(function(){
 
+    $('#searchCal').click(function(){
+        $('.objectContents').empty().load('modul/dashboard/call/getCalObjects.php');
+    });
+
     function addCalEntry(){
 
         $('#errorAlert').fadeOut('fast');
@@ -98,7 +102,7 @@ $(document).ready(function(){
             $.ajax({
                 type: "POST",
                 data: {date:date, amount:amount, title:title, calories:calories},
-                url: "modul/dashboard/addCalories.php",
+                url: "modul/dashboard/call/addCalories.php",
                 success: function(data){
                     if(data){
                         $('#errorText').html(data);
@@ -151,7 +155,7 @@ $(document).ready(function(){
             $.ajax({
                 type: "POST",
                 data: {date:date, weight:weight},
-                url: "modul/dashboard/addWeight.php",
+                url: "modul/dashboard/call/addWeight.php",
                 success: function(data){
                     if(data){
                         $('#errorText').html(data);

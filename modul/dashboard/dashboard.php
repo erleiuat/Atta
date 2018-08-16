@@ -19,6 +19,28 @@
             <span class="text-primary">Board</span>
         </h2>
         <br/>
+
+        <!-- Modal -->
+        <div class="modal fade" id="calSelectModal" tabindex="-1" role="dialog" aria-labelledby="calSelectModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="calSelectModal">Select Calories</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-12 objectContents">
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-6">
                 <div class="card" id="addEntryBox">
@@ -31,7 +53,7 @@
                                         <label for="inputCalTitle">Title</label>
                                         <div class="row">
                                             <div class="col-2">
-                                                <button type="button" id="searchCal" class="btn btn-default highlighter" style="">
+                                                <button type="button" id="searchCal" class="btn btn-default highlighter" data-toggle="modal" data-target="#calSelectModal">
                                                     <i class="fas fa-search"></i>
                                                 </button>
                                             </div>

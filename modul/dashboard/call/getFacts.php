@@ -3,8 +3,8 @@
     <h4>Facts</h4>
     <?php
 
-        include("../../include/session.php");
-        include("../../include/database.php");
+        include("../../../include/session.php");
+        include("../../../include/database.php");
 
         $sql = "SELECT age, height, weight, aim_date, aim_weight, gender FROM tb_user WHERE ID = $session_userid";
         $sql2 = "SELECT weight FROM tb_user_weight WHERE tb_user_ID = $session_userid ORDER BY date_entered DESC LIMIT 2";
