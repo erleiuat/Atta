@@ -11,58 +11,21 @@
 
 ?>
 
-<head>
-    <style>
-        .imageBox
-        {
-            position: relative;
-            height: 400px;
-            width: 400px;
-            border:1px solid #aaa;
-            background: #fff;
-            overflow: hidden;
-            margin-left: auto;
-            margin-right: auto;
-            background-repeat: no-repeat;
-            cursor:move;
-        }
-
-        .imageBox .thumbBox
-        {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200px;
-            height: 200px;
-            margin-top: -100px;
-            margin-left: -100px;
-            box-sizing: border-box;
-            border: 1px solid rgb(102, 102, 102);
-            box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
-            background: none repeat scroll 0% 0% transparent;
-        }
-
-        .imageBox .spinner
-        {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            text-align: center;
-            line-height: 400px;
-            background: rgba(0,0,0,0.7);
-        }
-        .cropButt {
-            float: right;
-            margin-left: 10px;
-        }
-    </style>
-</head>
 <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
     <div class="my-auto">
 
         <h3 class="mb-0">Entry Presets</h3>
+        <p>
+            <?php
+            $gdInfoArray = gd_info();
+$version = $gdInfoArray["GD Version"];
+echo "Your GD version is:".$version;
+echo "<hr />";
+foreach ($gdInfoArray as $key => $value) {
+echo "$key | $value<br />";
+}
+            ?>
+        </p>
         <div class="col-lg-12">
             <div class="row">
 
@@ -103,30 +66,14 @@
                                             <label for="usrFormGroup">Amount</label>
                                             <input type="text" class="form-control addUserInput" id="f_new_amount" name="f_new_amount" required>
                                         </div>
-                                        <script src="modul/objects/call/cropbox/javascript/cropbox.js"></script>
-                                        <div class="container" align="center">
-                                            <br/>
-                                            Image
-                                            <div class="imageBox">
-                                                <div class="thumbBox"></div>
-                                                <div class="spinner" style="display: none">Loading...</div>
-                                            </div>
-                                            <br/>
-                                            <div class="action">
-                                                <input class="form-control" type="file" id="file" style="float:left; width: 250px">
-                                                <input type="button" class="btn cropButt" id="btnZoomIn" value="+">
-                                                <input type="button" class="btn cropButt" id="btnZoomOut" value="-">
-                                            </div>
-                                            <div class="cropped">
-
-                                            </div>
+                                        <div class="col-lg-6">
+                                            <label for="usrFormGroup">Image</label>
+                                            <input type="file" class="form-control addUserInput" id="f_new_image" name="f_new_image">
                                         </div>
-                                        <script type="text/javascript" src="modul/objects/cropScripts.min.js"></script>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <input type="text" style="display:none;" id="f_new_image" name="f_new_image">
-                                    <input type="button" class="btn btn-primary cropButt" id="btnCrop" value="Add">
+                                    <input type="submit" class="btn btn-primary" id="f_submit" value="Add">
                                     <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
                                 </div>
                             </form>
