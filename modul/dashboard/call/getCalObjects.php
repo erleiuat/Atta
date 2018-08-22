@@ -10,6 +10,8 @@
 
             if(!$row['img_path']){
                 $row['img_path'] = "default.png";
+            } else {
+                $row['img_path'] = 'resized_'.$row['img_path'];
             }
 
             echo '
