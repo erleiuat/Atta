@@ -91,15 +91,15 @@
                                 <div class="searchRow singleObjectEntry highlighter row card" objectID="'.$row['ID'].'" style="padding-top:10px; min-width: 70vw; padding-left: 10px; padding-right: 15px; margin-bottom: 10px;">
 
                                     <div class="row objectHeader searchFor" objectID="'.$row['ID'].'" style="height: 30px;">
-                                        <div class="col-lg-6" style="cursor: pointer;">
+                                        <div class="col-3" style="cursor: pointer;">
                                             <p id=""><b>'.$row['title'].'</b></p>
                                         </div>
-                                        <div class="col-lg-6 text-right" style="cursor: pointer;">
-                                            '.$row['calories'].' Clories | Default Amount: '.$row['amount'].'
+                                        <div class="col-9 text-right" style="cursor: pointer;">
+                                            '.$row['calories'].' Clories | Amount: '.$row['amount'].'
                                         </div>
                                     </div>
 
-                                    <div class="row objectContent" objectID="'.$row['ID'].'" style="padding: 15px; display:none;">
+                                    <div class="row objectContent" objectID="'.$row['ID'].'" style="display:none;">
 
                                         <!-- CONTENTS -->
                                         <div class="col-lg-4">
@@ -116,7 +116,7 @@
                                         <div class="col-lg-8">
                                             Image
                                             <div class="row">
-                                                <div class="col-lg-4 my-auto">
+                                                <div class="col-lg-4 text-center my-auto">
                                                     <img src="img/calObjects/'.$row['img_path'].'" class="img-fluid" alt="objectImg" />
                                                 </div>
                                                 <div class="col-lg-8 my-auto">
