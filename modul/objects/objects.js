@@ -1,5 +1,37 @@
 $(document).ready(function(){
 
+    $('.fDelete').each(function(){
+        $(this).click(function(){
+
+            var objectID = $(this).attr('objectID');
+
+            $.ajax({
+                type: "POST",
+                data: {objectID:objectID},
+                url: "modul/objects/call/removePreset.php",
+                success: function(data){
+                    if(data){
+                        $('#errorText').html(data);
+                        $('#errorAlert').fadeIn('fast');
+                    } else {
+                        $('#successText').html("Successfully Removed.");
+                        $('#successAlert').fadeIn('fast').delay(2000).fadeOut('fast');
+
+                        $('.singleObjectEntry').each(function(){
+                            if($(this).attr('objectID') == objectID){
+                                $(this).slideUp('slow', function(){
+                                    $(this).remove();
+                                });
+                            }
+                        });
+
+                    }
+                }
+            });
+
+        });
+    });
+
     $('#searchInput').on('keyup', function(){
 
         var input, filter, ul, li, a, i;

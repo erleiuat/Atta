@@ -1,5 +1,12 @@
 <?php
 
+    include("../../../include/session.php");
+    include("../../../include/database.php");
+
+    if(!$session_loggedin){
+        exit();
+    }
+
     function test_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -7,48 +14,66 @@
         return $data;
     }
 
-    function generateRandomString($length = 30) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
+    function amk_img_resize($target, $newcopy, $w, $h, $ext) {
 
-    function uploadFile($image){
+        list($w_orig, $h_orig) = getimagesize($target);
+        $scale_ratio = $w_orig / $h_orig;
 
-        $fileName = generateRandomString() . ".png";
-        $filePath = "../../../img/calObjects/" . $fileName;
-
-        if(file_exists($filePath)) {
-            $id = 1;
-            do {
-                $fileName = generateRandomString() . ".png";
-                $filePath = "../../../img/calObjects/" . $fileName;
-                $id++;
-            } while(file_exists($filePath));
+        if (($w / $h) > $scale_ratio) {
+            $w = $h * $scale_ratio;
+        } else {
+            $h = $w / $scale_ratio;
         }
 
-        file_put_contents($filePath, $image);
+        $img = "";
+        $ext = strtolower($ext);
 
-        return $fileName;
+        if ($ext == "gif"){
+            $img = imagecreatefromgif($target);
+        } else if($ext =="png"){
+            $img = imagecreatefrompng($target);
+        } else {
+            $img = imagecreatefromjpeg($target);
+        }
 
-    }
+        $tci = imagecreatetruecolor($w, $h);
+        imagecopyresampled($tci, $img, 0, 0, 0, 0, $w, $h, $w_orig, $h_orig);
+        imagejpeg($tci, $newcopy, 80);
 
-    if($_POST['f_new_image']){
-        $img = $_POST['f_new_image'];
-        $img = str_replace('data:image/png;base64,', '', $img);
-        $img = str_replace(' ', '+', $img);
-        $fImage = uploadFile(base64_decode($img));
-    } else {
-        $fImage = "";
     }
 
     $fTitle = test_input($_POST['f_new_title']);
     $fCalories = test_input($_POST['f_new_calories']);
     $fAmount = test_input($_POST['f_new_amount']);
+
+    $fileName = $_FILES["uploaded_file"]["name"];
+    $fileTmpLoc = $_FILES["uploaded_file"]["tmp_name"];
+    $fileType = $_FILES["uploaded_file"]["type"];
+    $fileExt = end(explode(".", $fileName));
+
+    if (!$fileTmpLoc) { //
+        //Nothing
+        $fileName = "";
+    } else if (!preg_match("/.(jpg|png)$/i", $fileName) ) {
+         echo "ERROR: Your image was not .jpg, or .png.";
+         unlink($fileTmpLoc);
+         exit();
+    }
+
+    $moveResult = move_uploaded_file($fileTmpLoc, "../../../img/calObjects/$fileName");
+
+    if ($moveResult != true) {
+        unlink($fileTmpLoc);
+    }
+    unlink($fileTmpLoc);
+
+    $target_file = "../../../img/calObjects/$fileName";
+    $resized_file = "../../../img/calObjects/resized_$fileName";
+    $wmax = 200;
+    $hmax = 150;
+    amk_img_resize($target_file, $resized_file, $wmax, $hmax, $fileExt);
+
+    unlink($target_file);
 
     include("../../../include/session.php");
     include("../../../include/database.php");
@@ -63,7 +88,7 @@
              $error .= "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
         }
 
-        if (!$stmt->bind_param("ssddi", $fImage, $fTitle, $fCalories, $fAmount, $session_userid)) {
+        if (!$stmt->bind_param("ssddi", $fileName, $fTitle, $fCalories, $fAmount, $session_userid)) {
             $error .= "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
         }
 

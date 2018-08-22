@@ -15,17 +15,7 @@
     <div class="my-auto">
 
         <h3 class="mb-0">Entry Presets</h3>
-        <p>
-            <?php
-            $gdInfoArray = gd_info();
-$version = $gdInfoArray["GD Version"];
-echo "Your GD version is:".$version;
-echo "<hr />";
-foreach ($gdInfoArray as $key => $value) {
-echo "$key | $value<br />";
-}
-            ?>
-        </p>
+
         <div class="col-lg-12">
             <div class="row">
 
@@ -48,32 +38,33 @@ echo "$key | $value<br />";
                     <div class="modal-dialog">
                         <!-- Modal content-->
                         <div class="modal-content">
-                            <form action="modul/objects/call/addPreset.php" name="addNewPresetForm" id="addNewPresetForm" method="POST">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Add Preset</h4>
-                                </div>
+                            <div class="modal-header">
+                                <h4 class="modal-title">Add Preset</h4>
+                            </div>
+                            <form action="modul/objects/call/addPreset.php" enctype="multipart/form-data" method="post">
                                 <div class="modal-body">
                                     <div class="row" id="addUserForm">
                                         <div class="col-lg-6">
-                                            <label for="usrFormBkey">Title</label>
+                                            <label for="f_new_title">Title</label>
                                             <input type="text" class="form-control addUserInput" id="f_new_title" name="f_new_title" required>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label for="usrFormGroup">Calories</label>
+                                            <label for="f_new_calories">Calories</label>
                                             <input type="text" class="form-control addUserInput" id="f_new_calories" name="f_new_calories" required>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label for="usrFormGroup">Amount</label>
+                                            <label for="f_new_amount">Amount</label>
                                             <input type="text" class="form-control addUserInput" id="f_new_amount" name="f_new_amount" required>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label for="usrFormGroup">Image</label>
-                                            <input type="file" class="form-control addUserInput" id="f_new_image" name="f_new_image">
+                                            <label for="uploaded_file">Image</label>
+                                            <input name="uploaded_file" type="file"/><br /><br />
+                                            <!--<input type="file" class="form-control addUserInput" id="f_new_image" name="f_new_image">-->
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <input type="submit" class="btn btn-primary" id="f_submit" value="Add">
+                                    <input type="submit" class="btn btn-primary" name="submit" value="Add">
                                     <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
                                 </div>
                             </form>
@@ -92,10 +83,12 @@ echo "$key | $value<br />";
 
                                 if(!$row['img_path']){
                                     $row['img_path'] = "default.png";
+                                } else {
+                                    $row['img_path'] = 'resized_'.$row['img_path'];
                                 }
 
                                 echo '
-                                <div class="searchRow highlighter row card" style="padding-top:10px; min-width: 70vw; padding-left: 10px; padding-right: 15px; margin-bottom: 10px;">
+                                <div class="searchRow singleObjectEntry highlighter row card" objectID="'.$row['ID'].'" style="padding-top:10px; min-width: 70vw; padding-left: 10px; padding-right: 15px; margin-bottom: 10px;">
 
                                     <div class="row objectHeader searchFor" objectID="'.$row['ID'].'" style="height: 30px;">
                                         <div class="col-lg-6" style="cursor: pointer;">
@@ -128,7 +121,7 @@ echo "$key | $value<br />";
                                                 </div>
                                                 <div class="col-lg-8 my-auto">
                                                     <div class="col-lg-4">
-                                                        Change <input type="file" class="form-control" id="">
+                                                        Change <input type="file">
                                                     </div>
                                                 </div>
                                             </div>
@@ -143,7 +136,7 @@ echo "$key | $value<br />";
                                             <br />
                                         </div>
                                         <div class="col-lg-6">
-                                            <button class="btn btn-block btn-lg btn-danger fDelete"><span class="fa fa-trash-o" aria-hidden="true"></span> Delete</button>
+                                            <button objectID="'.$row['ID'].'" class="btn btn-block btn-lg btn-danger fDelete"><span class="fa fa-trash-o" aria-hidden="true"></span> Delete</button>
                                         </div>
 
                                         <br>
