@@ -6,7 +6,7 @@
         $_db_username = getenv('APP_DB_USER');
         $_db_passwort = getenv('APP_DB_PASS');
     } else {
-        include('include/database/dbCredentials.php');
+        include('database/credentials.php');
     }
 
     $mysqli = mysqli_connect($_db_host, $_db_username, $_db_passwort, $_db_database);
