@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="Simple Weight-Manager for easy loss of weight">
-        <meta name="author" content="Elia Reutlinger">
+        <meta name="author" content="Erleiuat">
 
         <title>Atta - Simple weight loss</title>
 
